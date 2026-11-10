@@ -27,8 +27,9 @@ class BirdSizeTests(unittest.TestCase):
                 subject = self.make_bird(scale)
                 self.assertAlmostEqual(subject.width, expected_width)
                 self.assertAlmostEqual(subject.height / subject.width, (506 / 3) / (918 / 5))
-                self.assertGreaterEqual(subject.width, 30.0)
-                self.assertLessEqual(subject.width, 45.0)
+                # 단위 환산의 부동소수점 오차(예: 45.00000000000001)를 허용한다.
+                self.assertGreaterEqual(subject.width, 30.0 - 1e-9)
+                self.assertLessEqual(subject.width, 45.0 + 1e-9)
 
     def test_larger_birds_keep_size_and_stay_inside_during_flight(self):
         for scale in (1.0, 1.25, 1.5):
