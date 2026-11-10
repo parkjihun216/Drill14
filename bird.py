@@ -12,6 +12,8 @@ FLIGHT_SPEED_MPS = FLIGHT_SPEED_KMPH * 1000.0 / 3600.0
 FLIGHT_SPEED_PPS = FLIGHT_SPEED_MPS * PIXEL_PER_METER
 BIRD_WIDTH_M = 0.9  # 투명 여백을 포함한 한 프레임의 가로 길이
 BIRD_WIDTH = BIRD_WIDTH_M * PIXEL_PER_METER
+MIN_SIZE_SCALE = 1.0
+MAX_SIZE_SCALE = 1.5
 
 SHEET_COLUMNS = 5
 SHEET_ROWS = 3
@@ -28,7 +30,9 @@ class Bird:
         if Bird.image is None:
             Bird.image = load_image('bird_animation.png')
 
-        self.width = BIRD_WIDTH
+        # 생성할 때 한 번만 정해 날갯짓 중에도 각 새의 크기를 유지한다.
+        self.size_scale = random.uniform(MIN_SIZE_SCALE, MAX_SIZE_SCALE)
+        self.width = BIRD_WIDTH * self.size_scale
         self.height = self.width * (self.image.h / SHEET_ROWS) / (self.image.w / SHEET_COLUMNS)
         # 가로 위치를 나눠 배치해 시작부터 10마리가 겹치지 않게 한다.
         left, right = self.width / 2, get_canvas_width() - self.width / 2

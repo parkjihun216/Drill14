@@ -25,7 +25,9 @@ class BirdTests(unittest.TestCase):
                 self.loader = mock
 
     def simulate(self, steps):
-        subject = bird.Bird()
+        # FPS 비교에서는 같은 크기와 초기 상태의 새를 사용한다.
+        with patch.object(bird.random, 'uniform', side_effect=[1.0, 300.0]):
+            subject = bird.Bird()
         subject.x, subject.direction, subject.frame = 300.0, 1, 2.25
         for dt in steps:
             game_framework.frame_time = dt
