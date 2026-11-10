@@ -40,15 +40,17 @@ def run(start_mode):
 
     global frame_time
     frame_time = 0.0
-    current_time = time.time()
+    current_time = time.perf_counter()
 
     while running:
         time.sleep(0.01)
+        # 현재 갱신 직전까지 실제로 경과한 시간을 모든 객체가 공유한다.
+        now = time.perf_counter()
+        frame_time = now - current_time
+        current_time = now
         stack[-1].handle_events()
+        if not running:
+            break
         stack[-1].update()
         stack[-1].render()
-        frame_time = time.time() - current_time
-        frame_rate = 1.0 / frame_time 
-        current_time += frame_time
-        print(f'Frame Time: {frame_time:.4f} seconds, Frame Rate: {frame_rate}')
         

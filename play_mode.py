@@ -3,6 +3,7 @@ import game_world
 import game_framework
 from boy import Boy
 from grass import Grass
+from bird import Bird, BIRD_COUNT
 
 boy = None
 
@@ -29,6 +30,9 @@ def init():
 
     grass = Grass()
     game_world.add_oject(grass, 0)
+
+    for index in range(BIRD_COUNT):
+        game_world.add_oject(Bird(index))
 
 
 def pause():
