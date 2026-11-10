@@ -4,6 +4,17 @@
 Esc 종료를 유지하고, 하늘에 새 10마리를 추가했다.
 실행 환경에는 `pico2d`, `PySDL2`, `transitions`가 필요하다.
 
+프로젝트 폴더에서 다음 명령을 실행한다. `requirements.txt`에는
+이 프로젝트를 실제로 검증한 라이브러리 버전을 기록했다.
+
+```powershell
+python -m pip install -r requirements.txt
+python main.py
+```
+
+이미지와 폰트는 현재 작업 폴더에서 읽으므로 실행 전에 프로젝트 폴더로 이동한다.
+예를 들어 이 작업 환경에서는 `cd C:\Drill14`를 실행한다.
+
 ## LEC16 적용 논리
 
 참고 자료는 `LEC16_시간.pdf`이다.
